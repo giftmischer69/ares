@@ -1,5 +1,7 @@
 # ares manifesto
 
+(work in progress)
+
 building habits and consistency
 
 ## Ease-of-use (android app)
@@ -40,30 +42,6 @@ doing hard things for fun / if a videogame is easy it is boring
 
 > I don't want to win i want to keep winning
 
-Buy Stuff that will guide you to do the things you want to do
-
-buy a nice bike, buy some running shoues,  etc and not a big tv ;)
-
----
-
-- stretches daily
-- write diary daily / maybe meditating is better
-- morning routine daily
-- heavy training (kickboxing) 3 times / week
-- no social media (no insta, no twitter, no youtube recommendations)
-
-- write at least one line of code daily
-- take supplements daily (protein, omega 3, multi-vitamin, vitamin d)
-
-- doing dishes
-- doing one thing towards moving
-- keep your surroundings clean and nice
-
-Lex Fridman Morning Routine
-
-1. Rules & constrains
-2. Gratitude
-3. Long-term goals (5 Years)
-4. Short-term goals (6 Months)
-5. Visualize the day
-6. Core principles
+ConsistencyApp
+Examine what stays the same every day (time to wake up, time to sleep, time of lunch, time of dinner, when to work out, when to meditate)
+Consistency streaks are the goal
