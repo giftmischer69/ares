@@ -1,3 +1,5 @@
+import 'package:ares/ares/widgets/daily_reminder.dart';
+import 'package:ares/db.dart';
 import 'package:flutter/material.dart';
 
 import "ares/widgets/increment_tracker.dart";
@@ -27,6 +29,7 @@ class MainRoute extends StatelessWidget {
 
   List<Widget> entries = <Widget>[
     IncrementTrackerWidget(),
+    DailyReminderWidget(),
   ];
 
   @override

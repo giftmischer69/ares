@@ -9,9 +9,9 @@ class IncrementTrackerWidget extends StatefulWidget {
 }
 
 class _IncrementTrackerState extends State<IncrementTrackerWidget> {
+  final database = MyDatabase();
   late Future<List<IncrementTrackerRecord>> _future =
       database.select(database.incrementTrackerRecords).get();
-  final database = MyDatabase();
 
   Future<void> _addRecord() async {
     await database.into(database.incrementTrackerRecords).insert(
@@ -36,19 +36,23 @@ class _IncrementTrackerState extends State<IncrementTrackerWidget> {
               const Material(
                 color: Colors.transparent,
                 shape: CircleBorder(
-                    side: BorderSide(
-                  color: Colors.black,
-                  width: 3,
-                )),
-                child: Icon(Icons.check_rounded, color: Colors.black, size: 50),
+                  side: BorderSide(
+                    //color: Colors.black,
+                    width: 3,
+                  ),
+                ),
+                child: Icon(Icons.check_rounded,
+                    //color: Colors.black,
+                    size: 40),
               ),
+              const Spacer(),
               Column(
                 children: <Widget>[
                   Row(
                     children: <Widget>[
                       Text(
                         "Upper",
-                        style: Theme.of(context).textTheme.headlineMedium,
+                        style: Theme.of(context).textTheme.headlineSmall,
                       ),
                       Text(
                         "Lower",
@@ -56,7 +60,14 @@ class _IncrementTrackerState extends State<IncrementTrackerWidget> {
                       )
                     ],
                   ),
-                  Row()
+                  Row(
+                    children: <Widget>[
+                      Text(
+                        "Lower Text",
+                        style: Theme.of(context).textTheme.labelMedium,
+                      )
+                    ],
+                  )
                 ],
               ),
               Center(
@@ -65,7 +76,7 @@ class _IncrementTrackerState extends State<IncrementTrackerWidget> {
               ),
               const Spacer(),
               IconButton(
-                icon: const Icon(Icons.exposure_plus_1),
+                icon: const Icon(Icons.add),
                 tooltip: 'Increment',
                 onPressed: _addRecord,
                 iconSize: 40,

@@ -14,6 +14,12 @@ class IncrementTrackerRecords extends Table {
   IntColumn get category => integer().nullable()();
 }
 
+class DailyReminderRecords extends Table {
+  IntColumn get id => integer().autoIncrement()();
+  DateTimeColumn get timeStamp => dateTime()();
+  IntColumn get category => integer().nullable()();
+}
+
 // This will make drift generate a class called "Category" to represent a row in
 // this table. By default, "Categorie" would have been used because it only
 //strips away the trailing "s" in the table name.
@@ -23,7 +29,8 @@ class Categories extends Table {
   TextColumn get description => text()();
 }
 
-@DriftDatabase(tables: [IncrementTrackerRecords, Categories])
+@DriftDatabase(
+    tables: [IncrementTrackerRecords, DailyReminderRecords, Categories])
 class MyDatabase extends _$MyDatabase {
   // we tell the database where to store the data with this constructor
   MyDatabase() : super(_openConnection());
@@ -31,7 +38,16 @@ class MyDatabase extends _$MyDatabase {
   // you should bump this number whenever you change or add a table definition.
   // Migrations are covered later in the documentation.
   @override
-  int get schemaVersion => 2;
+  int get schemaVersion => 3;
+}
+
+@override
+MigrationStrategy get migration {
+  return MigrationStrategy(
+    onCreate: (Migrator m) async {
+      await m.createAll();
+    },
+  );
 }
 
 LazyDatabase _openConnection() {
