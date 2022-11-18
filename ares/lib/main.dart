@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(const MaterialApp(
+import "ares/widgets/increment_tracker.dart";
+
+Future<void> main() async => runApp(const MaterialApp(
       title: "ares",
       home: MyApp(),
     ));
@@ -15,13 +17,17 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blueGrey,
       ),
-      home: const MainRoute(),
+      home: MainRoute(),
     );
   }
 }
 
 class MainRoute extends StatelessWidget {
-  const MainRoute({super.key});
+  MainRoute({super.key});
+
+  List<Widget> entries = <Widget>[
+    IncrementTrackerWidget(),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +35,18 @@ class MainRoute extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Title Text"),
       ),
-      body: const Center(
-        child: Text(
-          'Body Text',
+      body: Center(
+        child: ListView.separated(
+          padding: const EdgeInsets.all(8),
+          itemCount: entries.length,
+          itemBuilder: (BuildContext context, int index) {
+            return Container(
+              height: 50,
+              child: entries[index],
+            );
+          },
+          separatorBuilder: (BuildContext context, int index) =>
+              const Divider(),
         ),
       ),
     );
