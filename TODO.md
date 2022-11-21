@@ -17,5 +17,7 @@
     - [ ] TODO: Support for multiple instances of this widget
       - [ ] Problem: Need a database table with records: id, widget_id, timestamp.
       - [ ] Problem: This has to be limited to n slots or somehow dynamically created
+      - [ ] Possible Solution: have an extra field: blob (json) for additional dynamic widget data per record
+      - [ ] Possible Solution: use NoSQL DB and only store dynamic JSON
 
 - [ ] planned widgets

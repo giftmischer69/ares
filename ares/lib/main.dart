@@ -1,9 +1,4 @@
-import 'package:ares/db.dart';
 import 'package:flutter/material.dart';
-
-import 'package:ares/ares/widgets/daily_reminder.dart';
-import "ares/widgets/increment_tracker.dart";
-import "ares/widgets/toggle_widget.dart";
 
 Future<void> main() async => runApp(const MaterialApp(
       title: "ares",
@@ -20,7 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blueGrey,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MainRoute(),
     );
   }
 }
@@ -29,8 +24,8 @@ class MainRoute extends StatelessWidget {
   MainRoute({super.key});
 
   List<Widget> entries = <Widget>[
-    IncrementTrackerWidget(),
-    DailyReminderWidget(),
+    // IncrementTrackerWidget(),
+    // DailyReminderWidget(),
   ];
 
   @override
