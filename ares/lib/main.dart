@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import "package:ares/components/widgets/MyHomePage.dart";
 
-Future<void> main() async => runApp(const MaterialApp(
-      title: "ares",
-      home: MyApp(),
-    ));
+void main() {
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -13,41 +13,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blueGrey,
+        primarySwatch: Colors.blue,
       ),
-      home: MainRoute(),
-    );
-  }
-}
-
-class MainRoute extends StatelessWidget {
-  MainRoute({super.key});
-
-  List<Widget> entries = <Widget>[
-    // IncrementTrackerWidget(),
-    // DailyReminderWidget(),
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Title Text"),
-      ),
-      body: Center(
-        child: ListView.separated(
-          padding: const EdgeInsets.all(8),
-          itemCount: entries.length,
-          itemBuilder: (BuildContext context, int index) {
-            return Container(
-              height: 50,
-              child: entries[index],
-            );
-          },
-          separatorBuilder: (BuildContext context, int index) =>
-              const Divider(),
-        ),
-      ),
+      home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }

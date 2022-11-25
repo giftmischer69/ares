@@ -4,8 +4,8 @@
 
 - [ ] simple widget with persistence
   - [ ] Database functionality / persistence
-    - [ ] Database Problem solved! use hive
-    - [ ] <https://pub.dev/packages/hive>
+    - [ ] Database Problem solved! use isar
+    - [ ] <https://pub.dev/packages/isar>
       - [ ] One list of Records per widget Type
       - [ ] Also persist settings (eg. Dark Mode)
   - [ ] UI functionality / look
