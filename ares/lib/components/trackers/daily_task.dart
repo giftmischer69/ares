@@ -14,10 +14,7 @@ class DailyTaskWidget extends StatefulWidget {
 
 class _DailyTaskWidgetState extends State<DailyTaskWidget> {
   final _isar = Isar.openSync([DailyTaskRecordSchema]);
-  late List<DailyTaskRecord> _records =
-      _isar.dailyTaskRecords.where().findAllSync();
-
-  var _canCheck = true;
+  late bool _checkable = _canCheck();
 
   // TODO Read if can check from db, and only update on init and when pressed
 
@@ -30,7 +27,7 @@ class _DailyTaskWidgetState extends State<DailyTaskWidget> {
   }
 
   void _check() {
-    if (!_canCheck()) {
+    if (!_checkable) {
       print("can't check");
       return;
     }
@@ -42,33 +39,20 @@ class _DailyTaskWidgetState extends State<DailyTaskWidget> {
     });
 
     setState(() {
-      _records = _isar.dailyTaskRecords.where().findAllSync();
+      _checkable = false;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    var checkIcon = _canCheck() ? Icon(Icons.add) : Icon(Icons.check);
-    return ListView.separated(
-      itemCount: _records.length,
-      itemBuilder: (context, index) {
-        var record = _records[index];
-        return Row(
-          children: [
-            SizedBox(
-              height: 50,
-              child: Text("id:${record.id} timeStamp:${record.timeStamp}"),
-            ),
-            IconButton(
-              icon: checkIcon,
-              tooltip: 'Increment',
-              onPressed: _check,
-              iconSize: 40,
-            ),
-          ],
-        );
-      },
-      separatorBuilder: (BuildContext context, int index) => const Divider(),
+    var checkIcon = _checkable
+        ? const Icon(Icons.crop_square_rounded)
+        : const Icon(Icons.check);
+    return IconButton(
+      icon: checkIcon,
+      tooltip: 'Check',
+      onPressed: _check,
+      iconSize: 40,
     );
   }
 }
