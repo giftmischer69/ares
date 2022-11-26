@@ -2,6 +2,8 @@
 
 - [ ] write out manifesto
 
+- [] implement [this](https://medium.com/geekculture/isar-database-how-to-use-it-with-flutter-todo-app-978a2d7c85dd)
+
 - [ ] simple widget with persistence
   - [ ] Database functionality / persistence
     - [ ] Database Problem solved! use isar
