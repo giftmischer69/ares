@@ -23,7 +23,7 @@ class _HomeRouteState extends State<HomeRoute> {
             DailyTaskWidget(title: "DTW"),
           ],
         ),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
 }

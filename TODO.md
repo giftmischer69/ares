@@ -12,6 +12,8 @@
   - [ ] MVP
 
 - [ ] ui should look like fitbit app
+- [ ] [Dark Theme](https://medium.flutterdevs.com/implement-dark-mode-in-flutter-using-provider-158925112bf9)
+  - [ ] <https://pub.dev/packages/adaptive_theme>
 
 - [ ] widgets in development
   - [ ] daily (and/or periodic) reminder

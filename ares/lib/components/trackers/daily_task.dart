@@ -26,10 +26,8 @@ class _DailyTaskWidgetState extends State<DailyTaskWidget> {
 
   void _check() {
     if (!_checkable) {
-      print("can't check");
       return;
     }
-    print("can check");
 
     _isar.writeTxnSync(() {
       final dailyTaskRecord = DailyTaskRecord()..timeStamp = DateTime.now();
@@ -44,8 +42,8 @@ class _DailyTaskWidgetState extends State<DailyTaskWidget> {
   @override
   Widget build(BuildContext context) {
     var checkIcon = _checkable
-        ? const Icon(Icons.crop_square_rounded)
-        : const Icon(Icons.check);
+        ? const Icon(Icons.check_box_outline_blank)
+        : const Icon(Icons.check_box_outlined);
     return Card(
       child: ListTile(
         leading: const FlutterLogo(size: 56.0),
