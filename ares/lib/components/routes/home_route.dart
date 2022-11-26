@@ -18,7 +18,7 @@ class _HomeRouteState extends State<HomeRoute> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Row(
+        child: ListView(
           children: const <Widget>[
             DailyTaskWidget(title: "DTW"),
           ],

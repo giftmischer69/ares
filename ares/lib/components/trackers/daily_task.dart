@@ -16,8 +16,6 @@ class _DailyTaskWidgetState extends State<DailyTaskWidget> {
   final _isar = Isar.openSync([DailyTaskRecordSchema]);
   late bool _checkable = _canCheck();
 
-  // TODO Read if can check from db, and only update on init and when pressed
-
   bool _canCheck() {
     var now = DateTime.now();
     var today = DateTime.utc(now.year, now.month, now.day);
@@ -48,11 +46,19 @@ class _DailyTaskWidgetState extends State<DailyTaskWidget> {
     var checkIcon = _checkable
         ? const Icon(Icons.crop_square_rounded)
         : const Icon(Icons.check);
-    return IconButton(
-      icon: checkIcon,
-      tooltip: 'Check',
-      onPressed: _check,
-      iconSize: 40,
+    return Card(
+      child: ListTile(
+        leading: const FlutterLogo(size: 56.0),
+        title: const Text('Title'),
+        subtitle: const Text('Here is a second line'),
+        trailing: IconButton(
+          icon: checkIcon,
+          tooltip: 'Check',
+          onPressed: _check,
+          iconSize: 40,
+        ),
+        onTap: () => print("TODO route to DailyWidgetRoute"),
+      ),
     );
   }
 }
