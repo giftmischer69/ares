@@ -15,12 +15,3 @@ class Tracker {
 }
 
 enum TrackerType { daily, rule, increment }
-
-@Collection()
-class TrackerRecord {
-  Id id = Isar.autoIncrement;
-
-  late DateTime timeStamp;
-
-  final parent = IsarLink<Tracker>();
-}
