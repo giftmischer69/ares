@@ -10,6 +10,8 @@
     - [ ] <https://pub.dev/packages/isar>
       - [ ] One list of Records per widget Type
       - [ ] Also persist settings (eg. Dark Mode)
+      - [ ] Widget Instances are just DataClasses with an ID and no Methods
+      - [ ] Helper Classes for Rendering
   - [ ] UI functionality / look
   - [ ] MVP
 
