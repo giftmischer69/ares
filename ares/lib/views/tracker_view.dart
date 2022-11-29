@@ -1,5 +1,7 @@
 import 'package:ares/models/tracker.dart';
+import 'package:ares/models/tracker_record.dart';
 import 'package:ares/provider/tracker_provider.dart';
+import 'package:ares/provider/tracker_record_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -60,8 +62,26 @@ class DailyTrackerView extends StatefulWidget {
 class _DailyTrackerViewState extends State<DailyTrackerView> {
   @override
   Widget build(BuildContext context) {
-    // widget.context
-    // widget.tracker
+    // TODO show amount of records for specific tracker debug in subtitle
+    // TODO add record functionality
+    // TODO add CircularProgressIndicator around left icon
+    // TODO toggle right (and left) icon when a record for today is present
+
+    var now = DateTime.now();
+    var today = DateTime.utc(now.year, now.month, now.day);
+
+    int recordsToday = context
+        .read<TrackerRecordProvider>()
+        .records
+        .where((element) => element.timeStamp.isAfter(today))
+        .length;
+
+    var trackerRecords = context
+        .read<TrackerRecordProvider>()
+        .records
+        .where((element) => element.parent.value != null)
+        .where((element) => element.parent.value!.id == widget.tracker.id)
+        .toList();
 
     return ListTile(
       leading: const Icon(Icons.calendar_month),
@@ -72,9 +92,36 @@ class _DailyTrackerViewState extends State<DailyTrackerView> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
+            Text("num_rec:${trackerRecords.length}"),
             IconButton(
                 onPressed: () {
+                  print("TODO ADD RECORD ${widget.tracker.id}");
+                  var record = TrackerRecord()
+                    ..timeStamp = DateTime.now()
+                    ..parent.value = widget.tracker;
+
+                  context.read<TrackerRecordProvider>().addRecord(record);
+                  widget.notifyParent();
+                },
+                icon: const Icon(Icons.add)),
+            IconButton(
+                onPressed: () {
+                  // TODO also delete all records for this tracker
+                  // when tracker is deleted
+
+                  var thisTrackerRecords = context
+                      .read<TrackerRecordProvider>()
+                      .records
+                      .where((element) => element.parent.value != null)
+                      .where((element) =>
+                          element.parent.value!.id == widget.tracker.id);
+
+                  for (var element in thisTrackerRecords) {
+                    context.read<TrackerRecordProvider>().deleteRecord(element);
+                  }
+
                   context.read<TrackerProvider>().deleteTracker(widget.tracker);
+
                   widget.notifyParent();
                 },
                 icon: const Icon(Icons.delete)),

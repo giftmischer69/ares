@@ -1,31 +1,43 @@
-import 'package:flutter/material.dart';
-
-import 'package:provider/provider.dart';
-
+import 'package:ares/models/tracker_record.dart';
+import 'package:ares/provider/tracker_record_provider.dart';
 import 'package:ares/views/tracker_view.dart';
 import 'package:ares/models/tracker.dart';
 import 'package:ares/provider/tracker_provider.dart';
 
+import 'package:flutter/material.dart';
+
+import 'package:isar/isar.dart';
+import 'package:provider/provider.dart';
+
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  HomeScreen({super.key});
+
+  final isar = Isar.openSync([TrackerSchema, TrackerRecordSchema]);
 
   @override
   State<StatefulWidget> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<StatefulWidget> {
+class _HomeScreenState extends State<HomeScreen> {
   void refresh() {
     setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    return InheritedProvider<TrackerProvider>(
-      create: (_) => TrackerProvider(),
+    return MultiProvider(
+      providers: [
+        InheritedProvider<TrackerProvider>(
+          create: (_) => TrackerProvider(isar: widget.isar),
+        ),
+        InheritedProvider<TrackerRecordProvider>(
+          create: (_) => TrackerRecordProvider(isar: widget.isar),
+        ),
+      ],
       builder: (context, child) {
         return Scaffold(
           appBar: AppBar(
-            title: Text("ares"),
+            title: const Text("ares"),
           ),
           body: Padding(
             padding: const EdgeInsets.all(20.0),
@@ -42,16 +54,14 @@ class _HomeScreenState extends State<StatefulWidget> {
             ),
           ),
           floatingActionButton: FloatingActionButton(
-            child: const Icon(Icons.add),
+            child: const Icon(Icons.developer_mode),
             onPressed: () {
               final tracker = Tracker()
                 ..title = "Stretches"
                 ..description = "Do your stretches"
                 ..type = TrackerType.daily;
               context.read<TrackerProvider>().addTracker(tracker);
-              setState(() {
-                return;
-              });
+              setState(() {});
             },
           ),
         );

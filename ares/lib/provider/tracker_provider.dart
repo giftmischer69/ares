@@ -3,20 +3,18 @@ import 'package:isar/isar.dart';
 import 'package:ares/models/tracker.dart';
 
 class TrackerProvider with ChangeNotifier {
-  TrackerProvider() {
+  TrackerProvider({required this.isar}) {
     init();
   }
+
+  final Isar isar;
 
   List<Tracker> _trackers = [];
 
   List<Tracker> get trackers => _trackers;
 
-  late Isar isar;
-
   void init() {
-    isar = Isar.openSync([TrackerSchema]);
     _trackers = isar.trackers.where().findAllSync();
-    print("notifyListeners");
     notifyListeners();
   }
 
@@ -26,7 +24,6 @@ class TrackerProvider with ChangeNotifier {
     });
     _trackers.add(tracker);
 
-    print("notifyListeners");
     notifyListeners();
   }
 
@@ -34,7 +31,6 @@ class TrackerProvider with ChangeNotifier {
     isar.writeTxnSync(() {
       bool deleted = isar.trackers.deleteSync(tracker.id);
       if (deleted) _trackers.remove(tracker);
-      print("notifyListeners");
       notifyListeners();
     });
   }
