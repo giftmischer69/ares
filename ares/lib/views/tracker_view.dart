@@ -122,10 +122,11 @@ class _DailyTrackerViewState extends State<DailyTrackerView> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO show amount of records for specific tracker debug in subtitle
     // TODO add record functionality
     // TODO add CircularProgressIndicator around left icon
     // TODO toggle right (and left) icon when a record for today is present
+    // TODO detail task page, with description and editing etc
+    // TODO add tasks somehow with different screen
 
     var trackerRecords = getTrackerRecords(context);
 
@@ -141,6 +142,7 @@ class _DailyTrackerViewState extends State<DailyTrackerView> {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             IconButton(
+              // debug button
               onPressed: () {
                 print("populating ${widget.tracker.id}");
 
