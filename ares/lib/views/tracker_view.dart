@@ -157,35 +157,29 @@ class _DailyTrackerViewState extends State<DailyTrackerView> {
     var canCheck = calculateCanCheck(trackerRecords);
 
     return ListTile(
-      leading: Stack(
-        children: <Widget>[
-          Container(
-            width: 50,
-            height: 50,
-            decoration: BoxDecoration(
-              color: canCheck ? Colors.transparent : Colors.deepOrangeAccent,
-              shape: BoxShape.circle,
-            ),
-          ),
-          Container(
-            child: Icon(
-              Icons.calendar_month,
-              size: 40,
-              color: Colors.black,
-            ),
-            margin: EdgeInsets.all(5),
-          ),
-          // Circle Around
-          Container(
-            decoration: BoxDecoration(
+      leading: Container(
+        decoration: BoxDecoration(
+            shape: BoxShape.circle, border: Border.all(color: Colors.white)),
+        child: Stack(
+          children: <Widget>[
+            Container(
+              width: 50,
+              height: 50,
+              decoration: BoxDecoration(
+                color: canCheck ? Colors.transparent : Colors.deepOrangeAccent,
                 shape: BoxShape.circle,
-                border: Border.all(color: Colors.white)),
-            child: Icon(
-              Icons.check,
-              color: Colors.white,
+              ),
             ),
-          )
-        ],
+            SizedBox(
+              // margin: const EdgeInsets.all(5),
+              child: Icon(
+                Icons.calendar_month,
+                size: 50,
+                color: canCheck ? Colors.deepOrangeAccent : Colors.white,
+              ),
+            ),
+          ],
+        ),
       ),
       title: Text(widget.tracker.title),
       subtitle: Text("Streak: $streak Days 🔥"),
