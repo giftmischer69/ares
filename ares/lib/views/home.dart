@@ -12,7 +12,13 @@ import 'package:provider/provider.dart';
 class HomeScreen extends StatefulWidget {
   HomeScreen({super.key});
 
-  final isar = Isar.openSync([TrackerSchema, TrackerRecordSchema]);
+  final isar = initIsar();
+
+  static Isar initIsar() {
+    var isarInstance = Isar.getInstance();
+    isarInstance ??= Isar.openSync([TrackerSchema, TrackerRecordSchema]);
+    return isarInstance;
+  }
 
   @override
   State<StatefulWidget> createState() => _HomeScreenState();
