@@ -45,3 +45,5 @@ doing hard things for fun / if a videogame is easy it is boring
 ConsistencyApp
 Examine what stays the same every day (time to wake up, time to sleep, time of lunch, time of dinner, when to work out, when to meditate)
 Consistency streaks are the goal
+
+Successful people do daily what the unsuccessful only do occasionally

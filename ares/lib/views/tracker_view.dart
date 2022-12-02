@@ -143,6 +143,20 @@ class _DailyTrackerViewState extends State<DailyTrackerView> {
     }
   }
 
+  List<TrackerRecord> calculateRecordsThisWeek(
+      List<TrackerRecord> trackerRecords) {
+    var lastMonday = DateTime.now()
+        .subtract(Duration(days: DateTime.now().weekday - 1))
+        .intoDay();
+
+    print("weekday (1==Monday): ${lastMonday.weekday}");
+
+    var records = trackerRecords
+        .where((element) => element.timeStamp.isAfter(lastMonday))
+        .toList();
+    return records;
+  }
+
   @override
   Widget build(BuildContext context) {
     // TODO add CircularProgressIndicator around left icon
@@ -155,27 +169,22 @@ class _DailyTrackerViewState extends State<DailyTrackerView> {
 
     var streak = calculateStreak(trackerRecords);
     var canCheck = calculateCanCheck(trackerRecords);
+    var recordsThisWeek = calculateRecordsThisWeek(trackerRecords);
 
     return ListTile(
       leading: Container(
         decoration: BoxDecoration(
             shape: BoxShape.circle, border: Border.all(color: Colors.white)),
         child: Stack(
+          alignment: Alignment.center,
           children: <Widget>[
-            Container(
-              width: 50,
-              height: 50,
-              decoration: BoxDecoration(
-                color: canCheck ? Colors.transparent : Colors.deepOrangeAccent,
-                shape: BoxShape.circle,
-              ),
+            CircularProgressIndicator(
+              value: recordsThisWeek.length / 7,
             ),
             SizedBox(
-              // margin: const EdgeInsets.all(5),
               child: Icon(
                 Icons.calendar_month,
-                size: 50,
-                color: canCheck ? Colors.deepOrangeAccent : Colors.white,
+                color: canCheck ? Colors.deepOrangeAccent : Colors.black,
               ),
             ),
           ],
@@ -188,8 +197,10 @@ class _DailyTrackerViewState extends State<DailyTrackerView> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
+            /*
             IconButton(
               // debug button
+              
               onPressed: () {
                 print("populating ${widget.tracker.id}");
 
@@ -211,7 +222,7 @@ class _DailyTrackerViewState extends State<DailyTrackerView> {
                 widget.notifyParent();
               },
               icon: const Icon(Icons.developer_mode),
-            ),
+            ),*/
             IconButton(
               onPressed: () {
                 if (!canCheck) {
