@@ -178,8 +178,8 @@ class _DailyTrackerViewState extends State<DailyTrackerView> {
         child: Stack(
           alignment: Alignment.center,
           children: <Widget>[
-            CircularProgressIndicator(
-              value: recordsThisWeek.length / 7,
+            CustomProgressIndicator(
+              records: recordsThisWeek,
             ),
             SizedBox(
               child: Icon(
@@ -257,6 +257,34 @@ class _DailyTrackerViewState extends State<DailyTrackerView> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class CustomProgressIndicator extends StatelessWidget {
+  const CustomProgressIndicator({super.key, required this.records});
+
+  final List<TrackerRecord> records;
+
+  @override
+  Widget build(BuildContext context) {
+    // list bool for checked each day of the week
+    // 0 -> monday
+
+    var checkedDays = <bool>[true, false, false, true, false, true, false];
+    int counter = 0;
+    return Stack(
+      alignment: Alignment.center,
+      children: <Widget>[
+        for (var index in checkedDays)
+          CircularProgressIndicator(
+            value: (7 - counter) / 7,
+            color: index
+                ? Colors.yellow.withGreen(((255 / 7) * (7 - counter++)).toInt())
+                : Colors.transparent,
+            backgroundColor: Colors.transparent,
+          )
+      ],
     );
   }
 }
