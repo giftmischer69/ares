@@ -270,7 +270,7 @@ class CustomProgressIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     // list bool for checked each day of the week
     // 0 -> monday
-
+    // https://github.com/thisiskhan/thebrio_segmented_circle_border/blob/main/lib/thebri_segmented_circle_border.dart
     var checkedDays = <bool>[true, false, false, true, false, true, false];
     int counter = 0;
     return Stack(
