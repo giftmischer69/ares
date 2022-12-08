@@ -3,6 +3,7 @@ import 'package:ares/models/tracker_record.dart';
 import 'package:ares/provider/tracker_provider.dart';
 import 'package:ares/provider/tracker_record_provider.dart';
 import 'package:ares/utils/datetime_utils.dart';
+import 'package:ares/widgets/circular_segmented_progress_indicator.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -178,7 +179,7 @@ class _DailyTrackerViewState extends State<DailyTrackerView> {
         child: Stack(
           alignment: Alignment.center,
           children: <Widget>[
-            CustomProgressIndicator(
+            CircularSegmentedProgressIndicator(
               records: recordsThisWeek,
             ),
             SizedBox(
@@ -257,34 +258,6 @@ class _DailyTrackerViewState extends State<DailyTrackerView> {
           ],
         ),
       ),
-    );
-  }
-}
-
-class CustomProgressIndicator extends StatelessWidget {
-  const CustomProgressIndicator({super.key, required this.records});
-
-  final List<TrackerRecord> records;
-
-  @override
-  Widget build(BuildContext context) {
-    // list bool for checked each day of the week
-    // 0 -> monday
-    // https://github.com/thisiskhan/thebrio_segmented_circle_border/blob/main/lib/thebri_segmented_circle_border.dart
-    var checkedDays = <bool>[true, false, false, true, false, true, false];
-    int counter = 0;
-    return Stack(
-      alignment: Alignment.center,
-      children: <Widget>[
-        for (var index in checkedDays)
-          CircularProgressIndicator(
-            value: (7 - counter) / 7,
-            color: index
-                ? Colors.yellow.withGreen(((255 / 7) * (7 - counter++)).toInt())
-                : Colors.transparent,
-            backgroundColor: Colors.transparent,
-          )
-      ],
     );
   }
 }
