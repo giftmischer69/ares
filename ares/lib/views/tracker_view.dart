@@ -198,10 +198,9 @@ class _DailyTrackerViewState extends State<DailyTrackerView> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            /*
             IconButton(
               // debug button
-              
+
               onPressed: () {
                 print("populating ${widget.tracker.id}");
 
@@ -209,7 +208,8 @@ class _DailyTrackerViewState extends State<DailyTrackerView> {
                     context.read<TrackerRecordProvider>().deleteRecord);
 
                 List.generate(10, (i) {
-                  var other = DateTime.now().subtract(Duration(days: i + 1));
+                  var other =
+                      DateTime.now().subtract(Duration(days: 2 * i + 1));
 
                   print("pop: i:$i other:${other}");
 
@@ -223,7 +223,7 @@ class _DailyTrackerViewState extends State<DailyTrackerView> {
                 widget.notifyParent();
               },
               icon: const Icon(Icons.developer_mode),
-            ),*/
+            ),
             IconButton(
               onPressed: () {
                 if (!canCheck) {
