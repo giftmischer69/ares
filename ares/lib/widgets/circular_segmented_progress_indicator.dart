@@ -16,8 +16,6 @@ class CircularSegmentedProgressIndicator extends StatelessWidget {
     var now = DateTime.now();
     var latestMonday = now.subtract(Duration(days: now.weekday - 1)).intoDay();
 
-    print(latestMonday.day);
-
     var checkedDays = <bool>[];
     for (var index in List.generate(8, (i) => i)) {
       var isChecked = records

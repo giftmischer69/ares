@@ -85,7 +85,6 @@ class _DailyTrackerViewState extends State<DailyTrackerView> {
 
   int calculateStreak(List<TrackerRecord> trackerRecords) {
     if (trackerRecords.isEmpty) {
-      print("streak is 0, no records");
       return 0;
     }
 
@@ -100,7 +99,6 @@ class _DailyTrackerViewState extends State<DailyTrackerView> {
 
     if (recordsToday == 0 && recordsYesterday == 0) {
       // latest record has to be today or yesterday
-      print("streak is 0, no records today or yesterday");
       return 0;
     }
 
@@ -150,8 +148,6 @@ class _DailyTrackerViewState extends State<DailyTrackerView> {
         .subtract(Duration(days: DateTime.now().weekday - 1))
         .intoDay();
 
-    print("weekday (1==Monday): ${lastMonday.weekday}");
-
     var records = trackerRecords
         .where((element) => element.timeStamp.isAfter(lastMonday))
         .toList();
@@ -160,10 +156,14 @@ class _DailyTrackerViewState extends State<DailyTrackerView> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO add CircularProgressIndicator around left icon
-    // TODO toggle right (and left) icon when a record for today is present
-    // TODO detail task page, with description and editing etc
+    // TODO add CircularSegmentedProgressIndicator around left icon
+    // - [ ] toggle right (and left) icon when a record for today is present
+    // - [ ] Icon and CircularSegmentedProgressIndicator should have the
+    //        same, theme dependent, accent color
+    // - [ ] CircularSegmentedProgressIndicator Seperators should have the
+    //        right, theme dependent, background color
     // TODO add tasks somehow with different screen
+    // TODO detail task page, with description and editing etc
     // TODO Statistics View for DailyWidget with https://pub.dev/packages/table_calendar weekly/monthly views
 
     var trackerRecords = getTrackerRecords(context);
@@ -202,16 +202,12 @@ class _DailyTrackerViewState extends State<DailyTrackerView> {
               // debug button
 
               onPressed: () {
-                print("populating ${widget.tracker.id}");
-
                 trackerRecords.forEach(
                     context.read<TrackerRecordProvider>().deleteRecord);
 
                 List.generate(10, (i) {
                   var other =
                       DateTime.now().subtract(Duration(days: 2 * i + 1));
-
-                  print("pop: i:$i other:${other}");
 
                   var record = TrackerRecord()
                     ..timeStamp = other
@@ -227,7 +223,6 @@ class _DailyTrackerViewState extends State<DailyTrackerView> {
             IconButton(
               onPressed: () {
                 if (!canCheck) {
-                  print("can't check!");
                   return;
                 }
 
@@ -238,13 +233,10 @@ class _DailyTrackerViewState extends State<DailyTrackerView> {
                 context.read<TrackerRecordProvider>().addRecord(record);
                 widget.notifyParent();
               },
-              icon: canCheck ? Icon(Icons.add) : Icon(Icons.check),
+              icon: canCheck ? const Icon(Icons.add) : const Icon(Icons.check),
             ),
             IconButton(
               onPressed: () {
-                // TODO also delete all records for this tracker
-                // when tracker is deleted
-
                 context.read<TrackerProvider>().deleteTracker(widget.tracker);
 
                 for (var element in trackerRecords) {

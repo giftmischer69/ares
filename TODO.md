@@ -2,20 +2,19 @@
 
 - [ ] write out manifesto
 
-- [] implement [this](https://medium.com/geekculture/isar-database-how-to-use-it-with-flutter-todo-app-978a2d7c85dd)
-
-- [ ] simple widget with persistence
-  - [ ] Database functionality / persistence
-    - [ ] Database Problem solved! use isar
-    - [ ] <https://pub.dev/packages/isar>
-      - [ ] One list of Records per widget Type
+- [X] simple widget with persistence
+  - [X] Database functionality / persistence
+    - [X] Database Problem solved! use isar
+    - [X] <https://pub.dev/packages/isar>
+      - [X] One list of Records per widget Type
       - [ ] Also persist settings (eg. Dark Mode)
-      - [ ] Widget Instances are just DataClasses with an ID and no Methods
       - [ ] Helper Classes for Rendering
   - [ ] UI functionality / look
+    - [ ] Colors should depend on theme
+    - [ ] Save specific Accent Color for each TrackerWidget
+    - [ ] ui should look like fitbit app
   - [ ] MVP
 
-- [ ] ui should look like fitbit app
 - [ ] [Dark Theme](https://medium.flutterdevs.com/implement-dark-mode-in-flutter-using-provider-158925112bf9)
   - [ ] <https://pub.dev/packages/adaptive_theme>
 
@@ -25,14 +24,13 @@
     - [ ] on_click -> open daily_reminder_statistics_route
     - [ ] on_click on plus button -> add the day to successful days list
     - [ ] get reminder at a specific time
-    - [ ] TODO: Support for multiple instances of this widget
-      - [X] Problem: Need a database table with records: id, widget_id, timestamp.
-      - [X] Problem: This has to be limited to n slots or somehow dynamically created
-      - [X] Possible Solution: have an extra field: blob (json) for additional dynamic widget data per record
-      - [X] Possible Solution: use [NoSQL DB (eg. hive)](https://pub.dev/packages/hive) and only store dynamic JSON
-      - [ ] Implementation
 
 - [ ] planned widgets
+  - [ ] DailyLogTracker
+    - [ ] Write at least one sentence per day at a specific time
+    - [ ] like bereal just for private jorunal entries
+    - [ ] send notification
+    - [ ] enter text screen
 
 Done
 
