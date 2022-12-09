@@ -2,7 +2,7 @@ import 'package:ares/models/tracker.dart';
 import 'package:ares/models/tracker_record.dart';
 import 'package:ares/provider/tracker_provider.dart';
 import 'package:ares/provider/tracker_record_provider.dart';
-import 'package:ares/utils/datetime_utils.dart';
+import 'package:ares/utils/extensions.dart';
 import 'package:ares/widgets/circular_segmented_progress_indicator.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';

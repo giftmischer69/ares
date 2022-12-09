@@ -12,6 +12,8 @@ class Tracker {
 
   @enumerated
   late TrackerType type;
+
+  late String colorHex;
 }
 
-enum TrackerType { daily, rule, increment }
+enum TrackerType { daily, rule, increment, log }

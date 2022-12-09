@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:ares/models/tracker_record.dart';
-import 'package:ares/utils/datetime_utils.dart';
+import 'package:ares/utils/extensions.dart';
 import 'package:flutter/material.dart';
 
 class CircularSegmentedProgressIndicator extends StatelessWidget {

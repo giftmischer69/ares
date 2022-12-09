@@ -17,18 +17,23 @@ const TrackerSchema = CollectionSchema(
   name: r'Tracker',
   id: 7807881673085184336,
   properties: {
-    r'description': PropertySchema(
+    r'colorHex': PropertySchema(
       id: 0,
+      name: r'colorHex',
+      type: IsarType.string,
+    ),
+    r'description': PropertySchema(
+      id: 1,
       name: r'description',
       type: IsarType.string,
     ),
     r'title': PropertySchema(
-      id: 1,
+      id: 2,
       name: r'title',
       type: IsarType.string,
     ),
     r'type': PropertySchema(
-      id: 2,
+      id: 3,
       name: r'type',
       type: IsarType.byte,
       enumMap: _TrackertypeEnumValueMap,
@@ -54,6 +59,7 @@ int _trackerEstimateSize(
   Map<Type, List<int>> allOffsets,
 ) {
   var bytesCount = offsets.last;
+  bytesCount += 3 + object.colorHex.length * 3;
   bytesCount += 3 + object.description.length * 3;
   bytesCount += 3 + object.title.length * 3;
   return bytesCount;
@@ -65,9 +71,10 @@ void _trackerSerialize(
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  writer.writeString(offsets[0], object.description);
-  writer.writeString(offsets[1], object.title);
-  writer.writeByte(offsets[2], object.type.index);
+  writer.writeString(offsets[0], object.colorHex);
+  writer.writeString(offsets[1], object.description);
+  writer.writeString(offsets[2], object.title);
+  writer.writeByte(offsets[3], object.type.index);
 }
 
 Tracker _trackerDeserialize(
@@ -77,10 +84,11 @@ Tracker _trackerDeserialize(
   Map<Type, List<int>> allOffsets,
 ) {
   final object = Tracker();
-  object.description = reader.readString(offsets[0]);
+  object.colorHex = reader.readString(offsets[0]);
+  object.description = reader.readString(offsets[1]);
   object.id = id;
-  object.title = reader.readString(offsets[1]);
-  object.type = _TrackertypeValueEnumMap[reader.readByteOrNull(offsets[2])] ??
+  object.title = reader.readString(offsets[2]);
+  object.type = _TrackertypeValueEnumMap[reader.readByteOrNull(offsets[3])] ??
       TrackerType.daily;
   return object;
 }
@@ -97,6 +105,8 @@ P _trackerDeserializeProp<P>(
     case 1:
       return (reader.readString(offset)) as P;
     case 2:
+      return (reader.readString(offset)) as P;
+    case 3:
       return (_TrackertypeValueEnumMap[reader.readByteOrNull(offset)] ??
           TrackerType.daily) as P;
     default:
@@ -108,11 +118,13 @@ const _TrackertypeEnumValueMap = {
   'daily': 0,
   'rule': 1,
   'increment': 2,
+  'log': 3,
 };
 const _TrackertypeValueEnumMap = {
   0: TrackerType.daily,
   1: TrackerType.rule,
   2: TrackerType.increment,
+  3: TrackerType.log,
 };
 
 Id _trackerGetId(Tracker object) {
@@ -204,6 +216,136 @@ extension TrackerQueryWhere on QueryBuilder<Tracker, Tracker, QWhereClause> {
 
 extension TrackerQueryFilter
     on QueryBuilder<Tracker, Tracker, QFilterCondition> {
+  QueryBuilder<Tracker, Tracker, QAfterFilterCondition> colorHexEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'colorHex',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Tracker, Tracker, QAfterFilterCondition> colorHexGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'colorHex',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Tracker, Tracker, QAfterFilterCondition> colorHexLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'colorHex',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Tracker, Tracker, QAfterFilterCondition> colorHexBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'colorHex',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Tracker, Tracker, QAfterFilterCondition> colorHexStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'colorHex',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Tracker, Tracker, QAfterFilterCondition> colorHexEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'colorHex',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Tracker, Tracker, QAfterFilterCondition> colorHexContains(
+      String value,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'colorHex',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Tracker, Tracker, QAfterFilterCondition> colorHexMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'colorHex',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Tracker, Tracker, QAfterFilterCondition> colorHexIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'colorHex',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Tracker, Tracker, QAfterFilterCondition> colorHexIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'colorHex',
+        value: '',
+      ));
+    });
+  }
+
   QueryBuilder<Tracker, Tracker, QAfterFilterCondition> descriptionEqualTo(
     String value, {
     bool caseSensitive = true,
@@ -578,6 +720,18 @@ extension TrackerQueryLinks
     on QueryBuilder<Tracker, Tracker, QFilterCondition> {}
 
 extension TrackerQuerySortBy on QueryBuilder<Tracker, Tracker, QSortBy> {
+  QueryBuilder<Tracker, Tracker, QAfterSortBy> sortByColorHex() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'colorHex', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Tracker, Tracker, QAfterSortBy> sortByColorHexDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'colorHex', Sort.desc);
+    });
+  }
+
   QueryBuilder<Tracker, Tracker, QAfterSortBy> sortByDescription() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'description', Sort.asc);
@@ -617,6 +771,18 @@ extension TrackerQuerySortBy on QueryBuilder<Tracker, Tracker, QSortBy> {
 
 extension TrackerQuerySortThenBy
     on QueryBuilder<Tracker, Tracker, QSortThenBy> {
+  QueryBuilder<Tracker, Tracker, QAfterSortBy> thenByColorHex() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'colorHex', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Tracker, Tracker, QAfterSortBy> thenByColorHexDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'colorHex', Sort.desc);
+    });
+  }
+
   QueryBuilder<Tracker, Tracker, QAfterSortBy> thenByDescription() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'description', Sort.asc);
@@ -668,6 +834,13 @@ extension TrackerQuerySortThenBy
 
 extension TrackerQueryWhereDistinct
     on QueryBuilder<Tracker, Tracker, QDistinct> {
+  QueryBuilder<Tracker, Tracker, QDistinct> distinctByColorHex(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'colorHex', caseSensitive: caseSensitive);
+    });
+  }
+
   QueryBuilder<Tracker, Tracker, QDistinct> distinctByDescription(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -694,6 +867,12 @@ extension TrackerQueryProperty
   QueryBuilder<Tracker, int, QQueryOperations> idProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'id');
+    });
+  }
+
+  QueryBuilder<Tracker, String, QQueryOperations> colorHexProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'colorHex');
     });
   }
 
