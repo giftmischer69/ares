@@ -39,7 +39,8 @@ class CircularSegmentedProgressIndicator extends StatelessWidget {
     // 3 + 1 = 4
     var lastValue = 0.0;
     for (var isChecked in checkedDays) {
-      var seperatorValue = (1 / (numberOfSegments + 1)) / 3 + lastValue;
+      var seperatorValue =
+          (1 / (numberOfSegments + 1)) / numberOfSegments + lastValue;
       var indicatorValue = (1 / (numberOfSegments + 1)) + seperatorValue;
       lastValue = indicatorValue;
 

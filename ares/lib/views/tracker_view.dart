@@ -185,7 +185,7 @@ class _DailyTrackerViewState extends State<DailyTrackerView> {
             SizedBox(
               child: Icon(
                 Icons.calendar_month,
-                color: canCheck ? Colors.deepOrangeAccent : Colors.black,
+                color: canCheck ? Colors.grey : Colors.green,
               ),
             ),
           ],
@@ -198,28 +198,28 @@ class _DailyTrackerViewState extends State<DailyTrackerView> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            IconButton(
-              // debug button
+            // IconButton(
+            //   // debug button
 
-              onPressed: () {
-                trackerRecords.forEach(
-                    context.read<TrackerRecordProvider>().deleteRecord);
+            //   onPressed: () {
+            //     trackerRecords.forEach(
+            //         context.read<TrackerRecordProvider>().deleteRecord);
 
-                List.generate(10, (i) {
-                  var other =
-                      DateTime.now().subtract(Duration(days: 2 * i + 1));
+            //     List.generate(10, (i) {
+            //       var other =
+            //           DateTime.now().subtract(Duration(days: 2 * i + 1));
 
-                  var record = TrackerRecord()
-                    ..timeStamp = other
-                    ..parent.value = widget.tracker;
+            //       var record = TrackerRecord()
+            //         ..timeStamp = other
+            //         ..parent.value = widget.tracker;
 
-                  context.read<TrackerRecordProvider>().addRecord(record);
-                });
+            //       context.read<TrackerRecordProvider>().addRecord(record);
+            //     });
 
-                widget.notifyParent();
-              },
-              icon: const Icon(Icons.developer_mode),
-            ),
+            //     widget.notifyParent();
+            //   },
+            //   icon: const Icon(Icons.developer_mode),
+            // ),
             IconButton(
               onPressed: () {
                 if (!canCheck) {

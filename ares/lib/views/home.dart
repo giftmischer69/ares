@@ -1,6 +1,6 @@
 import 'package:ares/models/tracker_record.dart';
 import 'package:ares/provider/tracker_record_provider.dart';
-import 'package:ares/views/add_tracker_view.dart';
+import 'package:ares/views/add_tracker_form.dart';
 import 'package:ares/views/tracker_view.dart';
 import 'package:ares/models/tracker.dart';
 import 'package:ares/provider/tracker_provider.dart';
@@ -65,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => MyCustomForm()),
+                MaterialPageRoute(builder: (context) => AddTrackerForm()),
               );
 
               // final tracker = Tracker()

@@ -13,7 +13,10 @@ class Tracker {
   @enumerated
   late TrackerType type;
 
-  late String colorHex;
+  @enumerated
+  late ThemeColor color;
 }
 
 enum TrackerType { daily, rule, increment, log }
+
+enum ThemeColor { backgrond, red, blue, green, yellow }
